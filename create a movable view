@@ -1,0 +1,51 @@
+# when your view is in the root layout(fullscreen layout might with statusbar or actionbar),you can use these codes
+public class MovableViewActivity extends Activity {
+
+    TextView theMovableView;
+    float downx,downy;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_movable_view);
+        theMovableView = findViewById(R.id.theMovableView);
+        theMovableView.setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                switch (motionEvent.getActionMasked()){
+                    case MotionEvent.ACTION_DOWN:
+                        downx = motionEvent.getX();
+                        downy = motionEvent.getY();
+                        break;
+                    case MotionEvent.ACTION_MOVE:
+                        theMovableView.setX(motionEvent.getRawX()-downx);
+                        theMovableView.setY(motionEvent.getRawY()-downy-getbarsHeight());
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        break;
+                }
+
+                return true;
+            }
+
+
+
+        });
+    }
+
+    private float getbarsHeight() {
+        int statusBarHeight = 0;
+        int resourceId = getApplicationContext().getResources().getIdentifier("status_bar_height", "dimen", "android");
+        if (resourceId > 0) {
+            statusBarHeight = getApplicationContext().getResources().getDimensionPixelSize(resourceId);
+        }
+
+        int actionBarHeight = 0;
+        if (getActionBar()!=null){
+            getActionBar().getHeight();
+        }
+
+        return statusBarHeight+actionBarHeight;
+    }
+}
