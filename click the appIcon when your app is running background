@@ -1,0 +1,9 @@
+Click the appIcon when your app is running background,you might reboot the whole app.
+the following codes works on hongmi android pie;
+
+super.onCreate(savedInstanceState);
+        if ((getIntent().getFlags() & Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT) != 0) {  
+            finish();  
+            return;  
+        }// don't know the reason for the time being
+        setContentView(R.layout.activity_main);
