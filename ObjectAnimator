@@ -8,5 +8,5 @@ ObjectAnimator animator = ObjectAnimator.ofFloat(view ,"translationX", 500);
 //view: the target View you want to animator, 
 //"translationX": the property of the View that you want change,
 //500: the value you want to achieve after animate,it can be two parms, they present the start coordinate the end coordinate,if more，median
-coordinate can be present like  (start， median， median，end)
+coordinate can be present like  (start "the offset of current position"， median， median，end)
 animator.start();
